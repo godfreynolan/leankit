@@ -10,12 +10,10 @@ BOARD_ID = config.BOARD_ID
 LANE_ID = config.LANE_ID
 API_TOKEN = config.PLANVIEW_API_TOKEN
 
-@app.route('/create_card', methods=['POST'])
+@app.route('/create_card', methods=['GET'])
 def create_card():
-    data = request.get_json()
-
-    # Expecting a 'title' in the JSON payload
-    title = data.get('title', 'Untitled Card')
+    # Get the 'title' parameter from the query string
+    title = request.args.get('title', 'Untitled Card')
 
     url = f"https://{HOST}.leankit.com/io/card"
     payload = {
